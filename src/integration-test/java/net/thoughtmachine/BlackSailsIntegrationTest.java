@@ -21,12 +21,12 @@ public class BlackSailsIntegrationTest {
 	}	
 	
 	@Test
-	public void testInvalidInputThrowsException() {
+	public void testInputWithEndOfMoveCollisionsThrowsException() {
 		fail();
 	}
 	
 	@Test
-	public void testInputWithEndOfMoveCollisionsThrowsException() {
+	public void testMalformedInputThrowsException() {
 		fail();
 	}
 }
