@@ -22,11 +22,6 @@ public class ClassicInputParserService implements InputParserService {
 	private static final Pattern SHIP_PATTERN = Pattern.compile("(\\(\\d+, \\d+, \\w\\))\\s*");
 	private static final Pattern SHIP_VALUES_PATTERN = Pattern.compile("\\((\\d+), (\\d+), (\\w)\\)");
 	
-	private static final String ORIENTATION_NORTH = "N";
-	private static final String ORIENTATION_SOUTH = "S";
-	private static final String ORIENTATION_EAST = "E";
-	private static final String ORIENTATION_WEST = "W";
-	
 	@Override
 	public GameModel parseInput(InputStream inputStream) {
 	    BufferedReader reader = getReader(inputStream);
@@ -91,19 +86,12 @@ public class ClassicInputParserService implements InputParserService {
 		}
 	}
 	
-	private Orientation getOrientationFromString(String orientation) {
-		switch(orientation) {
-			case ORIENTATION_NORTH:
-				return Orientation.NORTH;
-			case ORIENTATION_SOUTH:
-				return Orientation.SOUTH;
-			case ORIENTATION_EAST:
-				return Orientation.EAST;
-			case ORIENTATION_WEST:
-				return Orientation.WEST;
+	private Orientation getOrientationFromString(String orientationString) {
+		Orientation orientation = Orientation.LOOKUP.get(orientationString);
+		if(orientation == null) {
+			throw new RuntimeException("Could not determine orientation from string '" + orientationString + "'.");
 		}
-		
-		throw new RuntimeException("Could not determine orientation from string '" + orientation + "'.");
+		return orientation;
 	}
 	
 	private void loadOperation(String operation) {
