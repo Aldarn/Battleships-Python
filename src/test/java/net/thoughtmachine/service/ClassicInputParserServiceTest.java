@@ -21,7 +21,12 @@ public class ClassicInputParserServiceTest {
 	}
 	
 	@Test
-	public void testInvalidShipsThrowsException() {
+	public void testShipUnknownOrientationThrowsException() {
+		fail();
+	}
+	
+	@Test
+	public void testShipCoordBeyondBoardSizeThrowsException() {
 		fail();
 	}
 	
