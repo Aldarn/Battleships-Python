@@ -1,5 +1,7 @@
 package net.thoughtmachine.strategy;
 
+import net.thoughtmachine.domain.GameBoard;
+
 public interface OutputStrategy {
-	static String generateOutput(GameBoard board) {}
+	String generateOutput(GameBoard board);
 }

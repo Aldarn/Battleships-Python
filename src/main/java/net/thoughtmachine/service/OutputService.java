@@ -1,5 +1,8 @@
 package net.thoughtmachine.service;
 
+import net.thoughtmachine.domain.GameBoard;
+import net.thoughtmachine.strategy.OutputStrategy;
+
 public interface OutputService {
-	static void createOutput(GameBoard board) {}
+	void createOutput(OutputStrategy strategy, GameBoard board);
 }
