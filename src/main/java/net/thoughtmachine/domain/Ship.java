@@ -2,24 +2,24 @@ package net.thoughtmachine.domain;
 
 public class Ship {
 	private Coord coord;
-	private Direction direction;
+	private Orientation orientation;
 	private boolean isSunk = false;
 	
-	public Ship(Coord coord, Direction startDirection) {
+	public Ship(Coord coord, Orientation startOrientation) {
 		this.coord = coord;
-		this.direction = startDirection;
+		this.orientation = startOrientation;
 	}
 	
 	public Coord getCoord() {
 		return coord;
 	}
 	
-	public Direction getDirection() {
-		return direction;
+	public Orientation getOrientation() {
+		return orientation;
 	}
 	
-	public void setDirection(Direction direction) {
-		this.direction = direction;
+	public void setDirection(Orientation orientation) {
+		this.orientation = orientation;
 	}
 	
 	public boolean isSunk() {
