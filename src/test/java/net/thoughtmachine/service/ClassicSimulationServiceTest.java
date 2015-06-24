@@ -10,15 +10,7 @@ public class ClassicSimulationServiceTest {
 		fail();
 	}
 	
-	public void testMoveOperationsApplyToBoard() {
-		fail();
-	}
-	
-	public void testTurnOperationsDontApplyToBoard() {
-		fail();
-	}
-	
-	public void testShootOperationsDontApplyToBoard() {
+	public void testMoveOperationsApplied() {
 		fail();
 	}
 	
