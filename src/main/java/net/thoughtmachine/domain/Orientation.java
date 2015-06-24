@@ -1,6 +1,6 @@
 package net.thoughtmachine.domain;
 
-public enum Direction {
+public enum Orientation {
 	NORTH,
 	SOUTH,
 	EAST,
