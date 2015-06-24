@@ -29,4 +29,9 @@ public class Ship {
 	public void setSunk(boolean isSunk) {
 		this.isSunk = isSunk;
 	}
+	
+	@Override
+	public String toString() {
+		return "(" + coord.x + " " + coord.y + " " + orientation.getToken() + ")";
+	}
 }
