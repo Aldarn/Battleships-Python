@@ -14,4 +14,9 @@ public class TurnActionTest {
 	public void testMoveActionRight() {
 		fail();
 	}
+	
+	@Test
+	public void testTurnSunkenShipThrowsException() {
+		fail();
+	}
 }
