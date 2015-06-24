@@ -29,4 +29,9 @@ public class MoveActionTest {
 	public void testMoveActionBeyondBoardDimensionsThrowsException() {
 		fail();
 	}
+	
+	@Test
+	public void testMoveSunkenShipThrowsException() {
+		fail();
+	}
 }
