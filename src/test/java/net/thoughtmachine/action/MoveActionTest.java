@@ -24,4 +24,9 @@ public class MoveActionTest {
 	public void testMoveActionWest() {
 		fail();
 	}
+	
+	@Test
+	public void testMoveActionBeyondBoardDimensionsThrowsException() {
+		fail();
+	}
 }
