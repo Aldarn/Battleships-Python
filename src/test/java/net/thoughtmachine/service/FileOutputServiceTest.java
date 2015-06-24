@@ -4,7 +4,7 @@ import static org.junit.Assert.fail;
 
 import org.junit.Test;
 
-public class OutputServiceImplTest {
+public class FileOutputServiceTest {
 	@Test
 	public void testCreateOutput() {
 		fail();
