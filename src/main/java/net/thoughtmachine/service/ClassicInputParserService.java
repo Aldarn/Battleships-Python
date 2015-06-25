@@ -105,12 +105,9 @@ public class ClassicInputParserService implements InputParserService {
 		int x = Integer.valueOf(coordX);
 		int y = Integer.valueOf(coordY);
 		
-		// Check if the coordinate falls outside the board
-		if(x < 0 || y < 0 || x >= board.getSize() || y >= board.getSize()) {
-			throw new RuntimeException("Coordinate '" + coordX + ", " + coordY + "'found outisde of board range (0, " + board.getSize() + ")");
-		}
-		
-		return new Coord(x, y);			
+		Coord coord = new Coord(x, y);
+		coord.isValid(board);
+		return coord;
 	}
 	
 	private Ship parseShip(Coord coord, String orientationString) {
