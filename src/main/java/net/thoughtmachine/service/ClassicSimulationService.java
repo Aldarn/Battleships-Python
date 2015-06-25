@@ -1,5 +1,6 @@
 package net.thoughtmachine.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import net.thoughtmachine.action.Action;
@@ -36,6 +37,9 @@ public class ClassicSimulationService implements SimulationService {
 				// Update ship to the new coordinate
 				ship.setCoord(coord);
 				List<Ship> ships = board.get(coord);
+				if(ships == null) {
+					ships = new ArrayList<Ship>();
+				}
 				ships.add(ship);
 				board.put(coord, ships);
 				
