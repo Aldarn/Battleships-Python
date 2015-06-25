@@ -27,11 +27,11 @@ especially in the input parser service.
 
 There's several implementation details that could be debated such as:
 
-	* Are the services are required at all, especially the simulation service?
-	* Generating a model before executing the operations, rather than running them as loaded
-	* Parsing with regex rather than inbuilt Java methods or a parser generator
-	* Implementation of the board as a HashMmap rather than a list or 2d array
-	* Use of Coord object rather than generating a Cantor
+* Are the services are required at all, especially the simulation service?
+* Generating a model before executing the operations, rather than running them as loaded
+* Parsing with regex rather than inbuilt Java methods or a parser generator
+* Implementation of the board as a HashMmap rather than a list or 2d array
+* Use of Coord object rather than generating a Cantor
 
 
 Limitations
