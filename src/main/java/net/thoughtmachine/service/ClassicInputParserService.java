@@ -31,7 +31,7 @@ public class ClassicInputParserService implements InputParserService {
 	
 	private static final Pattern SHIP_PATTERN = Pattern.compile("(\\(\\d+, \\d+, \\w\\))\\s*");
 	private static final Pattern SHIP_VALUES_PATTERN = Pattern.compile("\\((\\d+), (\\d+), (\\w)\\)");
-	private static final Pattern OPERATION_PATTERN = Pattern.compile("\\(\\d+, \\d\\)\\s*(\\w+)*");
+	private static final Pattern OPERATION_PATTERN = Pattern.compile("(\\(\\d+, \\d+\\))\\s*(\\w+)*");
 	private static final Pattern OPERATION_COORD_PATTERN = Pattern.compile("\\((\\d+), (\\d+)\\)");
 	
 	private static final int OPERATION_SHOOT_GROUP_COUNT = 1;
@@ -130,35 +130,37 @@ public class ClassicInputParserService implements InputParserService {
 	private void loadOperation(GameModel gameModel, String operationString) {
 		Matcher operationMatcher = OPERATION_PATTERN.matcher(operationString);
 		if(operationMatcher.matches()) {
+			Coord coord;
 			Matcher operationCoordMatcher = OPERATION_COORD_PATTERN.matcher(operationMatcher.group(1));
-			Coord coord = parseCoord(gameModel.getInitialBoard(), operationCoordMatcher.group(1), operationCoordMatcher.group(2));
-			Operation operation = new Operation(coord);
+			if(operationCoordMatcher.matches()) {
+				coord = parseCoord(gameModel.getInitialBoard(), operationCoordMatcher.group(1), operationCoordMatcher.group(2));
+			} else {
+				throw new RuntimeException("Could not determine coord from operation '" + operationMatcher.group(1) + "'.");
+			}
 			
-			switch(operationMatcher.groupCount()) {
-				case OPERATION_SHOOT_GROUP_COUNT:	
-					operation.add(new ShootAction());
-					gameModel.add(operation);
-					break;
-				case OPERATION_OTHER_GROUP_COUNT:
-					for(char actionToken : operationMatcher.group(2).toCharArray()) {
-						switch(actionToken) {
-							case ACTION_MOVE_TOKEN:
-								operation.add(new MoveAction());
-								break;
-							case ACTION_TURN_LEFT_TOKEN:
-								operation.add(new TurnAction(Direction.LEFT));
-								break;
-							case ACTION_TURN_RIGHT_TOKEN:
-								operation.add(new TurnAction(Direction.RIGHT));
-								break;
-							default:
-								throw new RuntimeException("Could not determine action from token '" + actionToken + "'.");
-						}
+			Operation operation = new Operation(coord);
+			String actionList = operationMatcher.group(2);
+			
+			if(actionList == null) {
+				operation.add(new ShootAction());
+				gameModel.add(operation);
+			} else {
+				for(char actionToken : actionList.toCharArray()) {
+					switch(actionToken) {
+						case ACTION_MOVE_TOKEN:
+							operation.add(new MoveAction());
+							break;
+						case ACTION_TURN_LEFT_TOKEN:
+							operation.add(new TurnAction(Direction.LEFT));
+							break;
+						case ACTION_TURN_RIGHT_TOKEN:
+							operation.add(new TurnAction(Direction.RIGHT));
+							break;
+						default:
+							throw new RuntimeException("Could not determine action from token '" + actionToken + "'.");
 					}
-					gameModel.add(operation);			
-					break;
-				default:
-					throw new RuntimeException("Could not determine operation from string '" + operationString + "'.");
+				}
+				gameModel.add(operation);
 			}
 		}
 	}
