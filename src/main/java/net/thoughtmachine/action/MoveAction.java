@@ -1,9 +1,9 @@
 package net.thoughtmachine.action;
 
-import net.thoughtmachine.domain.Ship;
+import net.thoughtmachine.domain.Coord;
 
 public class MoveAction extends Action {
-	public MoveAction(Ship target) {
+	public MoveAction(Coord target) {
 		super(target);
 	}
 	

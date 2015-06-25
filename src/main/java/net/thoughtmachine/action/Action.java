@@ -1,15 +1,15 @@
 package net.thoughtmachine.action;
 
-import net.thoughtmachine.domain.Ship;
+import net.thoughtmachine.domain.Coord;
 
 public abstract class Action {
-	private Ship target;
+	private Coord target;
 	
-	public Action(Ship target) {
+	public Action(Coord target) {
 		this.target = target;
 	}
 	
-	public Ship getTarget() {
+	public Coord getTarget() {
 		return target;
 	}
 	
