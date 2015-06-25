@@ -36,6 +36,6 @@ public class Ship {
 	
 	@Override
 	public String toString() {
-		return "(" + coord.x + " " + coord.y + " " + orientation.getToken() + ")" + (isSunk ? " SUNK" : "");
+		return "(" + coord.x + ", " + coord.y + ", " + orientation.getToken() + ")" + (isSunk ? " SUNK" : "");
 	}
 }
