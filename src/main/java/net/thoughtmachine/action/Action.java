@@ -5,5 +5,5 @@ import net.thoughtmachine.domain.GameBoard;
 import net.thoughtmachine.domain.Ship;
 
 public abstract class Action {
-	abstract Coord act(GameBoard board, Ship ship, Coord coord);
+	public abstract Coord act(GameBoard board, Ship ship, Coord coord);
 }
