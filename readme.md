@@ -3,7 +3,7 @@ Running
 
 Run the following from the project base directory:
 
-	gradle run -Pargs="f input.txt"
+	gradle run -Pargs="/input.txt"
 
 Reflection
 ==========
