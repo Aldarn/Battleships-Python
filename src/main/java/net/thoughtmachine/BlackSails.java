@@ -1,5 +1,6 @@
 package net.thoughtmachine;
 
+import java.io.IOException;
 import java.io.InputStream;
 
 import net.thoughtmachine.domain.GameBoard;
@@ -32,7 +33,7 @@ public class BlackSails {
 		this.inputPath = inputPath;
 	}
 	
-	public void sail() {
+	public void sail() throws IOException {
 		// Parse the input and get the game model
 		GameModel gameModel = inputParser.parseInput(openInputStream(inputPath));
 		
@@ -55,7 +56,7 @@ public class BlackSails {
   		return parser.parse(options, args);
   	}
 
-  	public static void main(String... args) throws ParseException {
+  	public static void main(String... args) throws ParseException, IOException {
   		// Create the services... this could be done by dependency injection
 		InputParserService inputParser = new ClassicInputParserService();
 		SimulationService simulationService = new ClassicSimulationService();
