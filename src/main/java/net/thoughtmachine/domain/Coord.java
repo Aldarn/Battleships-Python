@@ -15,6 +15,13 @@ public class Coord {
 		this.y = y;
 	}
 	
+	public boolean isValid(GameBoard board) {
+		if(x < 0 || y < 0 || x >= board.getSize() || y >= board.getSize()) {
+			throw new RuntimeException("Coordinate '" + x + ", " + y + "'found outisde of board range (0, " + board.getSize() + ")");
+		}
+		return true;
+	}
+	
 	@Override
 	public int hashCode() {
 		return new HashCodeBuilder(17, 31).
