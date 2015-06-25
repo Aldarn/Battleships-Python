@@ -14,7 +14,7 @@ public class BlackSailsIntegrationTest {
 	@Test
 	public void testInputProvidesCorrectOutput() throws ParseException, IOException {
 		// -------------------------------------------------------
-		BlackSails.main("-f input.txt");
+		BlackSails.main("input.txt");
 		// -------------------------------------------------------
 		File file = new File("output.txt");
 		FileInputStream fis = new FileInputStream(file);
