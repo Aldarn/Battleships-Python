@@ -63,10 +63,13 @@ public class BlackSails {
 		OutputService outputService = new FileOutputService();
 		
 		// Get command line arguments
-		CommandLine clArgs = getCommandLineArguments(args);
+		// TODO: This won't work with Gradle, fix it
+		// CommandLine clArgs = getCommandLineArguments(args);
+		// String inputFile = clArgs.getOptionValue('f');
+		String inputFile = args[0];
 		
 		// Let's go!
-  		BlackSails app = new BlackSails(inputParser, simulationService, outputService, clArgs.getOptionValue('f'));
+  		BlackSails app = new BlackSails(inputParser, simulationService, outputService, inputFile);
   		app.sail();
     }
 }
