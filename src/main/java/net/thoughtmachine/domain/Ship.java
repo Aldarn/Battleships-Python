@@ -26,8 +26,8 @@ public class Ship {
 		return isSunk;
 	}
 	
-	public void setSunk(boolean isSunk) {
-		this.isSunk = isSunk;
+	public void sink() {
+		this.isSunk = true;
 	}
 	
 	@Override
