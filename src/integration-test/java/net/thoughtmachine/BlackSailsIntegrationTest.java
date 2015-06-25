@@ -18,12 +18,7 @@ public class BlackSailsIntegrationTest {
 	@Test
 	public void testMediumInputProvidesCorrectOutput() throws ParseException, IOException {
 		assertEquals(runWithInput("/mediumInput.txt"), "(5, 4, W)\n(4, 4, S) SUNK\n(9, 5, E)\n(3, 1, E) SUNK");
-	}	
-	
-	@Test
-	public void testLargeInputProvidesCorrectOutput() throws ParseException, IOException {
-		assertEquals(runWithInput("/largeInput.txt"), "");
-	}	
+	}
 	
 	@Test(expected = RuntimeException.class)
 	public void testInputWithEndOfOperationCollisionsThrowsException() throws ParseException, IOException {
@@ -37,6 +32,12 @@ public class BlackSailsIntegrationTest {
 		runWithInput("/malformedInput.txt");
 	}
 	
+	/**
+	 * Runs the main application on the given file and returns the contents of the output file.
+	 * 
+	 * TODO: This is a hack, should stub the output service to return a string when testing 
+	 * instead of creating a file.
+	 */
 	private String runWithInput(String inputPath) throws ParseException, IOException {
 		// -------------------------------------------------------
 		BlackSails.main(inputPath);
