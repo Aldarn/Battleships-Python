@@ -17,4 +17,13 @@ public class GameBoard extends HashMap<Coord, List<Ship>> {
 	public int getSize() {
 		return size;
 	}
+	
+	public Ship getNonSunk(Coord coord) {
+		for(Ship ship : get(coord)) {
+			if(ship.isSunk()) {
+				return ship;
+			}
+		}
+		return null;
+	}
 }
