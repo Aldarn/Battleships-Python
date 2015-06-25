@@ -11,9 +11,10 @@ public class ClassicOutputStrategy implements OutputStrategy {
 		String output = "";
 		for(List<Ship> ships : board.values()) {
 			for(Ship ship : ships) {
+				// TODO: Should use OS friendly carriage returns here
 				output += ship + "\n";
 			}
 		}
-		return output.substring(0, -2);
+		return output.substring(0, output.length() - 1);
 	}
 }
