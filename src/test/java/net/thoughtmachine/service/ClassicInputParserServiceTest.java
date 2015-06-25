@@ -57,13 +57,19 @@ public class ClassicInputParserServiceTest {
 		GameModel model = parserSpy.parseInput(inputStream);
 		// -------------------------------------------------------
 		assertEquals(model.getInitialBoard().size(), 2);
+		
+		int i = 0;
 		for(List<Ship> ships : model.getInitialBoard().values()) {
-			assertEquals(ships.get(0).getCoord().x, 1);
-			assertEquals(ships.get(0).getCoord().y, 2);
-			assertEquals(ships.get(0).getOrientation(), Orientation.NORTH);
-			assertEquals(ships.get(1).getCoord().x, 9);
-			assertEquals(ships.get(1).getCoord().y, 4);
-			assertEquals(ships.get(1).getOrientation(), Orientation.EAST);
+			if(i == 0) {
+				assertEquals(ships.get(0).getCoord().x, 1);
+				assertEquals(ships.get(0).getCoord().y, 2);
+				assertEquals(ships.get(0).getOrientation(), Orientation.NORTH);
+			} else {
+				assertEquals(ships.get(0).getCoord().x, 9);
+				assertEquals(ships.get(0).getCoord().y, 4);
+				assertEquals(ships.get(0).getOrientation(), Orientation.EAST);
+			}
+			i++;
 		}
 	}
 	
@@ -73,7 +79,7 @@ public class ClassicInputParserServiceTest {
 		BufferedReader reader = mock(BufferedReader.class);
 		InputStream inputStream = mock(InputStream.class);
 		doReturn(reader).when(parserSpy).getReader(inputStream);
-		when(reader.readLine()).thenReturn("10").thenReturn("(1, 2, H)");
+		when(reader.readLine()).thenReturn("10").thenReturn("(1, 2, H)").thenReturn(null);
 		// -------------------------------------------------------
 		parserSpy.parseInput(inputStream);
 		// -------------------------------------------------------

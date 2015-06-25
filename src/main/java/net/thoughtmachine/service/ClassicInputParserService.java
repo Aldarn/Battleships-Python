@@ -31,7 +31,7 @@ public class ClassicInputParserService implements InputParserService {
 	
 	private static final Pattern SHIP_PATTERN = Pattern.compile("(\\(\\d+, \\d+, \\w\\))\\s*");
 	private static final Pattern SHIP_VALUES_PATTERN = Pattern.compile("\\((\\d+), (\\d+), (\\w)\\)");
-	private static final Pattern OPERATION_PATTERN = Pattern.compile("\\(\\d+, \\d\\))\\s*(\\w+)*");
+	private static final Pattern OPERATION_PATTERN = Pattern.compile("\\(\\d+, \\d\\)\\s*(\\w+)*");
 	private static final Pattern OPERATION_COORD_PATTERN = Pattern.compile("\\((\\d+), (\\d+)\\)");
 	
 	private static final int OPERATION_SHOOT_GROUP_COUNT = 1;
@@ -87,18 +87,16 @@ public class ClassicInputParserService implements InputParserService {
 	
 	private void loadShips(GameBoard board, String ships) {
 		Matcher shipMatcher = SHIP_PATTERN.matcher(ships);
-		if(shipMatcher.matches()) {
-			for(int i = 1; i < shipMatcher.groupCount(); i++) {
-				Matcher shipValuesMatcher = SHIP_VALUES_PATTERN.matcher(shipMatcher.group(i));
-				if(shipValuesMatcher.matches()) {
-					Coord coord = parseCoord(board, shipValuesMatcher.group(1), shipValuesMatcher.group(2));
-					if(board.get(coord) != null) {
-						throw new RuntimeException("Two ships found starting in the same location (" + coord + ").");
-					}
-					List<Ship> shipSet = new ArrayList<Ship>();
-					shipSet.add(parseShip(coord, shipValuesMatcher.group(3)));
-					board.put(coord, shipSet);
+		while(shipMatcher.find()) {
+			Matcher shipValuesMatcher = SHIP_VALUES_PATTERN.matcher(shipMatcher.group(1));
+			if(shipValuesMatcher.matches()) {
+				Coord coord = parseCoord(board, shipValuesMatcher.group(1), shipValuesMatcher.group(2));
+				if(board.get(coord) != null) {
+					throw new RuntimeException("Two ships found starting in the same location (" + coord + ").");
 				}
+				List<Ship> shipSet = new ArrayList<Ship>();
+				shipSet.add(parseShip(coord, shipValuesMatcher.group(3)));
+				board.put(coord, shipSet);
 			}
 		}
 	}
@@ -108,7 +106,7 @@ public class ClassicInputParserService implements InputParserService {
 		int y = Integer.valueOf(coordY);
 		
 		// Check if the coordinate falls outside the board
-		if(x < 0 || y < 0 || x > board.getSize() || y > board.getSize()) {
+		if(x < 0 || y < 0 || x >= board.getSize() || y >= board.getSize()) {
 			throw new RuntimeException("Coordinate '" + coordX + ", " + coordY + "'found outisde of board range (0, " + board.getSize() + ")");
 		}
 		
