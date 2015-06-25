@@ -40,6 +40,7 @@ public class TurnActionTest {
 		GameBoard board = new GameBoard(10);
 		Coord coord = new Coord(0, 0);
 		Ship ship = new Ship(coord, Orientation.SOUTH);
+		ship.sink();
 		// -------------------------------------------------------
 		action.act(board, ship, coord);
 		// -------------------------------------------------------
