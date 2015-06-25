@@ -14,6 +14,10 @@ public class Ship {
 		return coord;
 	}
 	
+	public void setCoord(Coord coord) {
+		this.coord = coord;
+	}
+	
 	public Orientation getOrientation() {
 		return orientation;
 	}
