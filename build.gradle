@@ -40,5 +40,11 @@ task integrationTest(type: Test) {
     outputs.upToDateWhen { false }
 }
 
+run {
+    if (project.hasProperty('args')) {
+       args project.args.split('\\s+')
+   }
+}
+
 check.dependsOn integrationTest
 integrationTest.mustRunAfter test
