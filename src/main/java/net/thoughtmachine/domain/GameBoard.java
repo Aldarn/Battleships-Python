@@ -20,7 +20,7 @@ public class GameBoard extends HashMap<Coord, List<Ship>> {
 	
 	public Ship getNonSunk(Coord coord) {
 		for(Ship ship : get(coord)) {
-			if(ship.isSunk()) {
+			if(!ship.isSunk()) {
 				return ship;
 			}
 		}
