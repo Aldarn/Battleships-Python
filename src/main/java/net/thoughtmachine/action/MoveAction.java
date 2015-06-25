@@ -7,6 +7,10 @@ import net.thoughtmachine.domain.Ship;
 public class MoveAction extends Action {
 	@Override
 	public Coord act(GameBoard board, Ship ship, Coord coord) {
+		if(ship.isSunk()) {
+			throw new RuntimeException("Tried to move sunken ship " + ship + ".");
+		}
+		
 		Coord newCoord = null;
 		switch(ship.getOrientation()) {
 			case NORTH:

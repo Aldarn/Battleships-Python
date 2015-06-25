@@ -13,8 +13,18 @@ public class TurnAction extends Action {
 		this.direction = direction;
 	}
 	
+	public Direction getDirection() {
+		return direction;
+	}
+	
 	@Override
 	public Coord act(GameBoard board, Ship ship, Coord coord) {
+		if(ship.isSunk()) {
+			throw new RuntimeException("Tried to turn sunken ship " + ship + ".");
+		}
+		
+		// TODO: Fix this quick hack with a method on the Orientation enum that return the 
+		// enum with number currentEnumNumber + 1%4 for right and currentEnumNumber + 3%4 for left
 		switch(direction) {
 			case LEFT:
 				switch(ship.getOrientation()) {
