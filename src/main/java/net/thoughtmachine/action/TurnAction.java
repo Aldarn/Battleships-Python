@@ -19,9 +19,7 @@ public class TurnAction extends Action {
 	
 	@Override
 	public Coord act(GameBoard board, Ship ship, Coord coord) {
-		if(ship.isSunk()) {
-			throw new RuntimeException("Tried to turn sunken ship " + ship + ".");
-		}
+		validateShip(ship);
 		
 		// TODO: Fix this quick hack with a method on the Orientation enum that return the 
 		// enum with number currentEnumNumber + 1%4 for right and currentEnumNumber + 3%4 for left
@@ -59,5 +57,20 @@ public class TurnAction extends Action {
 				}
 		}
 		return coord;
+	}
+	
+	/**
+	 * Validates the ship.
+	 * 
+	 * TODO: This is common to Move and Turn actions - fix this
+	 */
+	private void validateShip(Ship ship) {
+		if(ship == null) {
+			throw new RuntimeException("Tried to turn non existent ship.");
+		}
+		
+		if(ship.isSunk()) {
+			throw new RuntimeException("Tried to turn sunken ship " + ship + ".");
+		}
 	}
 }

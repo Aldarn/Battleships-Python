@@ -7,9 +7,7 @@ import net.thoughtmachine.domain.Ship;
 public class MoveAction extends Action {
 	@Override
 	public Coord act(GameBoard board, Ship ship, Coord coord) {
-		if(ship.isSunk()) {
-			throw new RuntimeException("Tried to move sunken ship " + ship + ".");
-		}
+		validateShip(ship);
 		
 		Coord newCoord = null;
 		switch(ship.getOrientation()) {
@@ -28,5 +26,15 @@ public class MoveAction extends Action {
 		}
 		newCoord.isValid(board);
 		return newCoord;
+	}
+	
+	private void validateShip(Ship ship) {
+		if(ship == null) {
+			throw new RuntimeException("Tried to move non existent ship.");
+		}
+		
+		if(ship.isSunk()) {
+			throw new RuntimeException("Tried to move sunken ship " + ship + ".");
+		}
 	}
 }
