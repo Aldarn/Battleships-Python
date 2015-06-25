@@ -19,9 +19,12 @@ public class GameBoard extends HashMap<Coord, List<Ship>> {
 	}
 	
 	public Ship getNonSunk(Coord coord) {
-		for(Ship ship : get(coord)) {
-			if(!ship.isSunk()) {
-				return ship;
+		List<Ship> shipsAtCoord = get(coord);
+		if(shipsAtCoord != null) {
+			for(Ship ship : shipsAtCoord) {
+				if(!ship.isSunk()) {
+					return ship;
+				}
 			}
 		}
 		return null;
