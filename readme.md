@@ -4,6 +4,18 @@ Running
 Run the following from the project base directory:
 
 	gradle run -Pargs="/input.txt"
+	
+Testing
+=======
+
+Run the following from the project base directory:
+
+	gradle test
+
+For integration tests run the following:
+
+	gradle integrationTest
+
 
 Reflection
 ==========
