@@ -1,8 +1,8 @@
 package net.thoughtmachine.service;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
 
+import net.thoughtmachine.action.Action;
 import net.thoughtmachine.action.MoveAction;
 import net.thoughtmachine.action.ShootAction;
 import net.thoughtmachine.action.TurnAction;
@@ -149,20 +150,44 @@ public class ClassicInputParserServiceTest {
 		InputStream inputStream = mock(InputStream.class);
 		doReturn(reader).when(parserSpy).getReader(inputStream);
 		when(reader.readLine()).thenReturn("10").thenReturn("(3, 4, S)").thenReturn("(3, 4) MRL")
-			.thenReturn("(");
+			.thenReturn("(8, 8)").thenReturn("(2, 4) LRMLR").thenReturn(null);
 		// -------------------------------------------------------
 		GameModel model = parserSpy.parseInput(inputStream);
 		// -------------------------------------------------------
-		fail();
+		assertEquals(model.size(), 3);
+		assertEquals(model.get(0).size(), 3);
+		for(Action action : model.get(0)) {
+			assertFalse(action instanceof ShootAction);
+		}
+		assertEquals(model.get(1).size(), 1);
+		assertTrue(model.get(1).get(0) instanceof ShootAction);
+		assertEquals(model.get(2).size(), 5);
+		for(Action action : model.get(2)) {
+			assertFalse(action instanceof ShootAction);
+		}	
 	}
 	
-	@Test
-	public void testInvalidOperationCoordinatesThrowsException() {
-		fail();
+	@Test(expected = RuntimeException.class)
+	public void testInvalidOperationCoordinatesThrowsException() throws IOException {
+		ClassicInputParserService parserSpy = spy(parser);
+		BufferedReader reader = mock(BufferedReader.class);
+		InputStream inputStream = mock(InputStream.class);
+		doReturn(reader).when(parserSpy).getReader(inputStream);
+		when(reader.readLine()).thenReturn("10").thenReturn("(3, 4, S)").thenReturn("(99, 102) MRL").thenReturn(null);
+		// -------------------------------------------------------
+		GameModel model = parserSpy.parseInput(inputStream);
+		// -------------------------------------------------------
 	}
 	
-	@Test
-	public void testMalformedOperationThrowsException() {
-		fail();
+	@Test(expected = RuntimeException.class)
+	public void testMalformedOperationThrowsException() throws IOException {
+		ClassicInputParserService parserSpy = spy(parser);
+		BufferedReader reader = mock(BufferedReader.class);
+		InputStream inputStream = mock(InputStream.class);
+		doReturn(reader).when(parserSpy).getReader(inputStream);
+		when(reader.readLine()).thenReturn("10").thenReturn("(3, 4, S)").thenReturn("(1, 1) BLABLA").thenReturn(null);
+		// -------------------------------------------------------
+		GameModel model = parserSpy.parseInput(inputStream);
+		// -------------------------------------------------------
 	}
 }
