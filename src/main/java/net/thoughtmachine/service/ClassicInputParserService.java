@@ -162,6 +162,8 @@ public class ClassicInputParserService implements InputParserService {
 				}
 				gameModel.add(operation);
 			}
+		} else {
+			throw new RuntimeException("Could not parse from operation '" + operationString + "'.");
 		}
 	}
 }
