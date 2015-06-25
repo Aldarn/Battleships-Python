@@ -14,7 +14,7 @@ public class BlackSailsIntegrationTest {
 	@Test
 	public void testInputProvidesCorrectOutput() throws ParseException, IOException {
 		// -------------------------------------------------------
-		BlackSails.main("input.txt");
+		BlackSails.main("/input.txt");
 		// -------------------------------------------------------
 		File file = new File("output.txt");
 		FileInputStream fis = new FileInputStream(file);
@@ -22,7 +22,7 @@ public class BlackSailsIntegrationTest {
 		fis.read(data);
 		fis.close();
 		
-		assertEquals(String.valueOf(data), "(1, 3, N)\n(9, 2, E) SUNK");
+		assertEquals(new String(data, "UTF-8"), "(1, 3, N)\n(9, 2, E) SUNK");
 	}
 	
 	@Test
