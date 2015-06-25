@@ -34,4 +34,9 @@ public class MoveActionTest {
 	public void testMoveSunkenShipThrowsException() {
 		fail();
 	}
+	
+	@Test
+	public void testMoveNoShipThrowsException() {
+		fail();
+	}
 }
