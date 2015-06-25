@@ -9,8 +9,9 @@ Reflection
 ==========
 
 This is probably over-engineered and over-ambitious given the time frame, hence the quality of 
-the code has suffered. I wanted to try and create a production-like system; I believe the 
-architecture is decent enough so maybe i'm halfway there?
+the code has suffered slightly. I wanted to try and create a production-like system; I believe the 
+architecture is decent enough so maybe i'm halfway there? Some refactoring is definitely necessary, 
+especially in the input parser service.
 
 There's several implementation details that could be debated such as:
 
@@ -32,3 +33,7 @@ I wanted to get something actually working within the time frame.
 
 I had also intended on creating an output of an ASCII map but didn't have time. I wanted 
 to hook this into the simulation service so you could see it play out in real time.
+
+Exception handling is pretty contrived, any problem in the system throws a RuntimeException 
+and that is left to bubble up and kill the app. This should be improved to throw more 
+specific errors which would greatly improve testing integrity when expecting errors.
