@@ -9,7 +9,6 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import net.thoughtmachine.action.Action;
 import net.thoughtmachine.action.MoveAction;
 import net.thoughtmachine.action.ShootAction;
 import net.thoughtmachine.action.TurnAction;
@@ -17,6 +16,7 @@ import net.thoughtmachine.domain.Coord;
 import net.thoughtmachine.domain.Direction;
 import net.thoughtmachine.domain.GameBoard;
 import net.thoughtmachine.domain.GameModel;
+import net.thoughtmachine.domain.Operation;
 import net.thoughtmachine.domain.Orientation;
 import net.thoughtmachine.domain.Ship;
 
@@ -135,31 +135,30 @@ public class ClassicInputParserService implements InputParserService {
 		if(operationMatcher.matches()) {
 			Matcher operationCoordMatcher = OPERATION_COORD_PATTERN.matcher(operationMatcher.group(1));
 			Coord coord = parseCoord(gameModel.getInitialBoard(), operationCoordMatcher.group(1), operationCoordMatcher.group(2));
+			Operation operation = new Operation(coord);
 			
 			switch(operationMatcher.groupCount()) {
 				case OPERATION_SHOOT_GROUP_COUNT:	
-					List<Action> shootActionList = new ArrayList<>();
-					shootActionList.add(new ShootAction(coord));
-					gameModel.add(shootActionList);
+					operation.add(new ShootAction());
+					gameModel.add(operation);
 					break;
 				case OPERATION_OTHER_GROUP_COUNT:
-					List<Action> moveActionList = new ArrayList<>();
 					for(char actionToken : operationMatcher.group(2).toCharArray()) {
 						switch(actionToken) {
 							case ACTION_MOVE_TOKEN:
-								moveActionList.add(new MoveAction(coord));
+								operation.add(new MoveAction());
 								break;
 							case ACTION_TURN_LEFT_TOKEN:
-								moveActionList.add(new TurnAction(coord, Direction.LEFT));
+								operation.add(new TurnAction(Direction.LEFT));
 								break;
 							case ACTION_TURN_RIGHT_TOKEN:
-								moveActionList.add(new TurnAction(coord, Direction.RIGHT));
+								operation.add(new TurnAction(Direction.RIGHT));
 								break;
 							default:
 								throw new RuntimeException("Could not determine action from token '" + actionToken + "'.");
 						}
 					}
-					gameModel.add(moveActionList);			
+					gameModel.add(operation);			
 					break;
 				default:
 					throw new RuntimeException("Could not determine operation from string '" + operationString + "'.");

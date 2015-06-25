@@ -1,11 +1,8 @@
 package net.thoughtmachine.domain;
 
 import java.util.ArrayList;
-import java.util.List;
 
-import net.thoughtmachine.action.Action;
-
-public class GameModel extends ArrayList<List<Action>> {
+public class GameModel extends ArrayList<Operation> {
 	private static final long serialVersionUID = 42L;
 
 	private GameBoard initialBoard;
