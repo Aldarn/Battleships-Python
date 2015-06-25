@@ -40,10 +40,7 @@ Limitations
 Some of the code is quite ugly and definitely not production quality. This was due to time 
 restraints.
 
-Didn't have time to write all tests, despite starting out intending to be TDD. In the end 
-I wanted to get something actually working within the time frame.
-
-I had also intended on creating an output of an ASCII map but didn't have time. I wanted 
+I had intended on creating an output of an ASCII map but didn't have time. I wanted 
 to hook this into the simulation service so you could see it play out in real time.
 
 Exception handling is pretty contrived, any problem in the system throws a RuntimeException 
