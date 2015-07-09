@@ -20,10 +20,7 @@ For integration tests run the following:
 Reflection
 ==========
 
-This is probably over-engineered and over-ambitious given the time frame, hence the quality of 
-the code has suffered slightly. I wanted to try and create a production-like system; I believe the 
-architecture is decent enough so maybe i'm halfway there? Some refactoring is definitely necessary, 
-especially in the input parser service.
+This was created under significant time pressure. As such some refactoring is definitely necessary, especially in the input parser service.
 
 There's several implementation details that could be debated such as:
 
